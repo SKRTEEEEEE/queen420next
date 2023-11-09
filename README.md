@@ -2,6 +2,22 @@
 
 A fully functional big app with various features and Web3 integration.
 
+# Table of Contents
+
+1. [Objective](#objective)
+   - [Games](#games)
+   - [Contests](#contests)
+   - [Ecommerce](#ecommerce)
+   - [Blog](#blog)
+   - [Dashboard](#dashboard)
+   - [Other Functions](#other-functions)
+2. [Information](#information)
+   - [Getting Started](#getting-started)
+   - [Learn More](#learn-more)
+   - [Deploy on Vercel](#deploy-on-vercel)
+3. [Process](#process)
+   - [1.01 DASHBOARD UI&Link](#101-dashboard)
+
 ## Objective
 
 The objective of this project is to create a fully functional app with the following features:
@@ -35,18 +51,14 @@ The objective of this project is to create a fully functional app with the follo
 
 - Include various interactive elements to give users a futuristic experience.
 
-## Getting starting
+## Information
+
+### Getting starting
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 ### Learn More
@@ -66,6 +78,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Process
 
-### 1.01.01 DASHBOARD UI&Link
+### 1.01 DASHBOARD
 
-Im creating the fully Ui with Css modules and all the structure of the Dashboard following the tutorial of [Lama Dev](https://www.youtube.com/watch?v=cBg6xA5C60s&t=5669s) starting with this [Github](https://github.com/safak/nextadmin)
+#### .01 Dashboard UI&Link
+
+Created the basic structure of the README.md, the fully Ui with Css modules and all the structure of the Dashboard following the tutorial of [Lama Dev](https://www.youtube.com/watch?v=cBg6xA5C60s&t=5669s) starting with this [Github](https://github.com/safak/nextadmin)
+
+#### .02 MongoDb Connection
+
+Created the menu of README.md and end of define the structure of it. Connected the MongoDb database and fetch the users.
+
+- Mongoose for connect with MongoDB
+
+```bash
+npm i mongoose
+```
