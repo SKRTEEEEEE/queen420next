@@ -6,6 +6,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.freeimages.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'store.storeimages.cdn-apple.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.istockphoto.com',
+      },
     ],
   },
 };

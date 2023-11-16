@@ -86,10 +86,31 @@ Created the basic structure of the README.md, the fully Ui with Css modules and 
 
 #### .02 MongoDb Connection
 
-Created the menu of README.md and end of define the structure of it. Connected the MongoDb database and fetch the users.
+Connected the MongoDb database and fetch the users.
 
 - Mongoose for connect with MongoDB
 
 ```bash
 npm i mongoose
+```
+
+#### .03 Dashboard Backend
+
+Use querry for filter by name and numb of items in a page.
+Create user and products; add new, delete and update funtionality. Use Bcrypt for encrypt the password.
+
+- Bcrypt for crypt the password
+
+```bash
+npm i bcrypt
+```
+
+Create authconfig for make the logic that will do the autenticate, in auth archive we put all the actions like signin or signout, and all the info that we should save in the cookies, and we created the middleware in the root folder.
+Create a handleLogin logic that show the errors if user makes some error when he is trying to signin.
+\*-This part is not working. When a user login it text Wrong credentials but it makes good the autorize. It gives a error abot NEXT_redirect and it doesnt goes automaticly to /dashboard but when u try to refresh or enter again in /login cant.
+
+-Next-auth for autenticate
+
+```bash
+npm i next-auth
 ```
