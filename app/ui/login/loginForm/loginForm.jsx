@@ -4,6 +4,7 @@ import { authenticate } from '@/app/lib/actions';
 import styles from './loginForm.module.css';
 // import { useFormState } from 'react-dom';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const LoginForm = () => {
   const [err, setErr] = useState();
@@ -18,7 +19,11 @@ const LoginForm = () => {
 
       <input type="text" placeholder="username" name="username" />
       <input type="password" placeholder="password" name="password" />
-      <button>Login</button>
+
+      <button>
+        <Link href="/main">Login</Link>
+      </button>
+
       {err && err}
     </form>
   );

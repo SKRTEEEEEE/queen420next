@@ -16,22 +16,22 @@ export const menuItems = [
     list: [
       {
         title: 'Dashboard',
-        path: '/dashboard',
+        path: '/main/dashboard',
         icon: <MdDashboard />,
       },
       {
         title: 'Users',
-        path: '/dashboard/users',
+        path: '/main/dashboard/users',
         icon: <MdSupervisedUserCircle />,
       },
       {
         title: 'Products',
-        path: '/dashboard/products',
+        path: '/main/dashboard/products',
         icon: <MdShoppingBag />,
       },
       {
         title: 'Transactions',
-        path: '/dashboard/transactions',
+        path: '/main/dashboard/transactions',
         icon: <MdAttachMoney />,
       },
     ],
@@ -41,17 +41,17 @@ export const menuItems = [
     list: [
       {
         title: 'Revenue',
-        path: '/dashboard/revenue',
+        path: '/main/dashboard/revenue',
         icon: <MdWork />,
       },
       {
         title: 'Reports',
-        path: '/dashboard/reports',
+        path: '/main/dashboard/reports',
         icon: <MdAnalytics />,
       },
       {
         title: 'Teams',
-        path: '/dashboard/teams',
+        path: '/main/dashboard/teams',
         icon: <MdPeople />,
       },
     ],

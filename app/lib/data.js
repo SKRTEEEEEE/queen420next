@@ -3,12 +3,40 @@
 import { ProductModel } from './models/productSchema';
 import { UserModel } from '../lib/models/userSchema';
 import { connectToDB } from './utils';
+import { ArticleModel } from './models/articleSchema';
+
+// export const fetchArticles = async () => {
+//   connectToDB();
+//   const articles = await ArticleModel.find();
+//   //console.log(articles);
+//   return articles;
+// };
+
+export const fetchArticles = async (q, page) => {
+  //En caso de llegar "q" un querry, la funcion find solo buscara el usuario "regex" que sera lo que se busque en el querry
+  const regex = new RegExp(q, 'i');
+
+  const ITEMS_PAGE = 3;
+  try {
+    connectToDB();
+    const count = await ArticleModel.find({
+      author: { $regex: regex },
+    }).count();
+    const articles = await ArticleModel.find({ author: { $regex: regex } })
+      .limit(ITEMS_PAGE)
+      .skip(ITEMS_PAGE * (page - 1));
+    return { count, articles };
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to fetch Users');
+  }
+};
 
 export const fetchUsers = async (q, page) => {
   //En caso de llegar "q" un querry, la funcion find solo buscara el usuario "regex" que sera lo que se busque en el querry
   const regex = new RegExp(q, 'i');
 
-  const ITEMS_PAGE = 2;
+  const ITEMS_PAGE = 4;
   try {
     connectToDB();
     const count = await UserModel.find({ username: { $regex: regex } }).count();
@@ -36,7 +64,7 @@ export const fetchProducts = async (q, page) => {
   try {
     const regex = new RegExp(q, 'i');
 
-    const ITEMS_PAGE = 2;
+    const ITEMS_PAGE = 4;
     connectToDB();
     const count = await ProductModel.find({ title: { $regex: regex } }).count();
     const products = await ProductModel.find({ title: { $regex: regex } })

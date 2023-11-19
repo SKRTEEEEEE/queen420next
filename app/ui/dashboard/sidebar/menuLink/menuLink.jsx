@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './menuLink.module.css';
+//import styles from './menuLink.module.css';
 import { usePathname } from 'next/navigation';
 
 const MenuLink = ({ item }) => {
@@ -10,8 +10,8 @@ const MenuLink = ({ item }) => {
   return (
     <Link
       href={item.path}
-      className={`${styles.container} ${
-        pathname === item.path && styles.active
+      className={`flex items-center w-full gap-10 margin-5 0 rounded-sm ${
+        pathname === item.path && 'bg-blue-800'
       }`}
     >
       {item.icon}

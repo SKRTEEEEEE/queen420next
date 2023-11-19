@@ -1,7 +1,7 @@
 'use client';
 
 import { MdSearch } from 'react-icons/md';
-import styles from './search.module.css';
+// import styles from './search.module.css';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -26,13 +26,13 @@ const Search = ({ placeholder }) => {
   }, 300);
 
   return (
-    <div className={styles.container}>
-      <MdSearch />
+    <div className="flex items-center gap-4 bg-fuchsia-800 bg-opacity-10 border-2 border-fuchsia-700 p-2 rounded-md w-max-content">
+      <MdSearch className="text-fuchsia-700	" />
       <input
         onChange={handleSearch}
         type="text"
         placeholder={placeholder}
-        className={styles.input}
+        className="bg-transparent border-none text-text outline-none"
       />
     </div>
   );

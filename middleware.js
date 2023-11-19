@@ -8,7 +8,7 @@
 //   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 // };
 import NextAuth from 'next-auth';
-import { authConfig } from './app/authconfig';
+import { authConfig } from './app/auth.config';
 
 export default NextAuth(authConfig).auth;
 

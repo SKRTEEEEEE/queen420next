@@ -1,5 +1,12 @@
+import Navbar from '../ui/main/navbar';
+
 const Mainpage = () => {
-  return <div>This is the mainpage</div>;
+  return (
+    <div>
+      <Navbar />
+      <>This is the mainpage</>
+    </div>
+  );
 };
 
 export default Mainpage;
