@@ -47,6 +47,7 @@ export const { signIn, signOut, auth } = NextAuth({
       if (user) {
         token.username = user.username;
         token.img = user.img;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
@@ -54,6 +55,7 @@ export const { signIn, signOut, auth } = NextAuth({
       if (token) {
         session.username = token.username;
         session.img = token.img;
+        session.isAdmin = token.isAdmin;
       }
       return session;
     },

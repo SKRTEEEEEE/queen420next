@@ -1,9 +1,15 @@
 import Navbar from '../../ui/dashboard/navbar/navbar';
 import Sidebar from '../../ui/dashboard/sidebar/sidebar';
-//import styles from '../../ui/dashboard/dashboard.module.css';
 import Footer from '../../ui/dashboard/footer/footer';
+import { auth } from '@/app/auth';
+import { redirect } from 'next/navigation';
+//import { isAdminAuth } from '@/app/lib/utils';
 
 const Layout = ({ children }) => {
+  const user = auth();
+  if (!user.isAdmin) {
+    redirect('/main');
+  }
   return (
     <div className="flex h-screen  w-full">
       <div

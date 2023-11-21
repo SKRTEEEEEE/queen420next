@@ -143,6 +143,7 @@ Started creating the basic structure for the blog. Established a connection to t
 
 Create the structure of the v.01 blog. Maked elements responsive with tailwind but no end the final UI.
 _*Till this point im going to try to fix the error of authorize, doing it again*_
+DEBUGGED
 
 **HAY QUE HACER LAS COSAS MOBILE RESP.!!**
 

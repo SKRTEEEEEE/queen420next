@@ -7,6 +7,8 @@
 //   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 //   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 // };
+
+// import NextAuth from 'next-auth';
 import NextAuth from 'next-auth';
 import { authConfig } from './app/auth.config';
 

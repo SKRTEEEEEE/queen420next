@@ -9,7 +9,7 @@ const Categories = () => {
   const pathname = usePathname();
 
   // Obten el valor actual de 'cat' desde los parámetros de búsqueda
-  const currentCatValue = searchParams.get('cat');
+  const currentCatValue = searchParams.get('cat') || '';
 
   // Función para manejar cambios en el select
   const handleOptionCat = (event) => {

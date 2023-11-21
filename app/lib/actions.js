@@ -157,17 +157,16 @@ export const updateProduct = async (formData) => {
 
 export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
-  console.log('formData:', formData);
 
   try {
-    console.log('Before signIn');
     await signIn('credentials', {
       username,
       password,
     });
-    console.log('After signIn');
-  } catch (err) {
-    console.log('Error during signIn:', err);
-    return { error: `Wrong Credentials! ${err}` };
+  } catch (error) {
+    if (error.message.includes('CredentialsSignin')) {
+      return { error: 'Wrong Signin Credentials' };
+    }
+    throw error;
   }
 };
