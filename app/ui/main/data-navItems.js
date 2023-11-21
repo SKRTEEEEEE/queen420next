@@ -7,23 +7,28 @@ import {
 
 export const menuItems = [
   {
-    title: 'Dashboard',
-    path: '/main/dashboard',
-    icon: <MdSupervisedUserCircle />,
-  },
-  {
-    title: 'Agora',
-    path: '/main/agora',
-    icon: <MdDashboard />,
-  },
-  {
-    title: 'Products',
-    path: '/main/products',
-    icon: <MdShoppingBag />,
-  },
-  {
-    title: 'Transactions',
-    path: '/main/dashboard/transactions',
-    icon: <MdAttachMoney />,
+    title: 'main navlinks',
+    list: [
+      {
+        title: 'Dashboard',
+        path: '/main/dashboard',
+        icon: <MdSupervisedUserCircle />,
+      },
+      {
+        title: 'Agora',
+        path: '/main/agora',
+        icon: <MdDashboard />,
+      },
+      {
+        title: 'Products',
+        path: '/main/products',
+        icon: <MdShoppingBag />,
+      },
+      {
+        title: 'Transactions',
+        path: '/main/dashboard/transactions',
+        icon: <MdAttachMoney />,
+      },
+    ],
   },
 ];

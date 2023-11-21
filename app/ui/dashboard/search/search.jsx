@@ -23,7 +23,7 @@ const Search = ({ placeholder }) => {
     }
 
     replace(`${pathname}?${params}`);
-  }, 300);
+  }, 500);
 
   return (
     <div className="flex items-center gap-4 bg-fuchsia-800 bg-opacity-10 border-2 border-fuchsia-700 p-2 rounded-md w-max-content">

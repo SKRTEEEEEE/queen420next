@@ -5,24 +5,56 @@ import { UserModel } from '../lib/models/userSchema';
 import { connectToDB } from './utils';
 import { ArticleModel } from './models/articleSchema';
 
-// export const fetchArticles = async () => {
-//   connectToDB();
-//   const articles = await ArticleModel.find();
-//   //console.log(articles);
-//   return articles;
-// };
+export const fetchArticle = async (id) => {
+  connectToDB();
+  const article = await ArticleModel.findById(id);
+  //console.log(article);
+  return article;
+};
 
-export const fetchArticles = async (q, page) => {
+export const fetchArticlesbyAuthor = async (author, cat, q, page) => {
   //En caso de llegar "q" un querry, la funcion find solo buscara el usuario "regex" que sera lo que se busque en el querry
   const regex = new RegExp(q, 'i');
+  const catRegex = new RegExp(cat, 'i');
+  const ITEMS_PAGE = 3;
+  try {
+    connectToDB();
+    const count = await ArticleModel.find({
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
+      author: author,
+    }).count();
+    const articles = await ArticleModel.find({
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
+      author: author,
+    })
+      .limit(ITEMS_PAGE)
+      .skip(ITEMS_PAGE * (page - 1));
+    return { count, articles };
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to fetch Users');
+  }
+};
+
+export const fetchArticles = async (cat, q, page) => {
+  //En caso de llegar "q" un querry, la funcion find solo buscara el usuario "regex" que sera lo que se busque en el querry
+  const regex = new RegExp(q, 'i');
+  const catRegex = new RegExp(cat, 'i');
+  console.log(cat);
 
   const ITEMS_PAGE = 3;
   try {
     connectToDB();
     const count = await ArticleModel.find({
-      author: { $regex: regex },
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
     }).count();
-    const articles = await ArticleModel.find({ author: { $regex: regex } })
+    const articles = await ArticleModel.find({
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
+    })
       .limit(ITEMS_PAGE)
       .skip(ITEMS_PAGE * (page - 1));
     return { count, articles };

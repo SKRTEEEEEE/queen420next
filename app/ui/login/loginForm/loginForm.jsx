@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [err, setErr] = useState();
   const handleLogin = async (formData) => {
     const data = await authenticate(formData);
+    console.log(data);
     data.error && setErr(data.error);
   };
 

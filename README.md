@@ -1,4 +1,5 @@
 **NextJS MongoDB app**
+
 A fully functional big app with various features and Web3 integration.
 
 **Table of Contents**
@@ -19,30 +20,24 @@ A fully functional big app with various features and Web3 integration.
    - [1.02 MongoDb Connection](#102-mongodb-connection)
    - [1.03 Dashboard Backend](#103-dashboard-backend)
    - [1.04 Start of Blog](#104-start-of-blog)
+4. [Tareas](#tareas)
 
 # Objective
 
 The objective of this project is to create the web of our social organization focused in grow technologies helping to grow the future. For that we will offer more effective sales and advertising channels using 3.0 technologies, thus helping to achieve energy efficiency and doubly returning our help to the planet, since all our profits are invested in projects focused on saving resources.
 A fully functional app with the following features:
 
-## Games
-
-- **In V2?, Implement Web3 features like NFT objects and avatars.**
-
-## Contests
-
-- **In V2?, Implement Web3 features like NFT, Tokens, and Products.**
-
 ## Ecommerce
 
 - **Implement Web3 integration for payments, and support regular payments too.**
+  1.01.20 Will have a fully functionaly template for a ecommerce with dashboard, MongoDb, CRUD, autenticate, authorize admin to dashboard, stripe payment, ?blockchain payment...
 - **In V2, allow users to create their own stores and sell products.**
-  1.01.10 Will have a fully functionaly template for a ecommerce with dashboard, MongoDb, CRUD, autenticate, authorize admin to dashboard, stripe payment, try blockchain payment...
 
 ## Blog
 
 - **Create a fully functional blog where users can publish articles.**
 - **Enable interactions like liking, sharing, and commenting on posts.**
+  1.01.10 Will have a fully functionaly template for a blog with MongoDb, CRUD, autenticate, authorize admin, ?dashbord....
 - **In V2, users with a store can also post articles.**
 
 ## Dashboard
@@ -55,7 +50,21 @@ A fully functional app with the following features:
 
 - **Include various interactive elements to give users a futuristic experience.**
 
+## Games
+
+- **In V2?, Implement Web3 features like NFT objects and avatars.**
+
+## Contests
+
+- **In V2?, Implement Web3 features like NFT, Tokens, and Products.**
+
 # Information
+
+## Development tools
+
+- [Email project owner](adanreh.m@gmail.com) - email's owner
+- [Architecture diagram](https://app.eraser.io) - web architecture diagram
+- [Database atlas](https://cloud.mongodb.com) - online database control
 
 ## Getting starting
 
@@ -67,10 +76,17 @@ npm run dev
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about how i did this project, have a look of this:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- ### About React.js
+- [React-icons github](https://react-icons.github.io/react-icons/) - basic icons from React.
+- ### [Next.js Documentation](https://nextjs.org/docs) About Next.js.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ### [Tailwind css Documentation](https://tailwindcss.com/docs/) About Tailwind Css.
+- [Floatui Tailwind ui ](https://floatui.com/) - free modern tailwind ui.
+- [Flowbite Tailwind ui](https://flowbite.com/) - fast tailwind ui with Figma integration.
+
+- [Slick carousel library ](https://kenwheeler.github.io/slick/) - jQuery based carousel library.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
@@ -125,14 +141,20 @@ Started creating the basic structure for the blog. Established a connection to t
 
 ### .05 Blog UI&Link
 
-Hacer en la pantalla principal del blog que se puedan filtrar por categoria tambien.
-Hacer toda la primera gran estructura del blog, pensar en los comentarios de los usuarios los mg...
-Por lo menos la vista del articulo, que se vean los comentarios y dentro de estos hacer un hilo
-que haya megusta, y opcion de repostear y mas que se añadiran en el futuro.
+Create the structure of the v.01 blog. Maked elements responsive with tailwind but no end the final UI.
+_*Till this point im going to try to fix the error of authorize, doing it again*_
 
 **HAY QUE HACER LAS COSAS MOBILE RESP.!!**
 
 # **TAREAS**
 
-- Hay que pasar el dashboard a mobile responsive
+- Hay que ir haciendo el diagrama de la estructura de la web
+
 - Hay que arreglar lo de la autentificacion y la autorizacion al dashboard
+- Hay que pasar el dashboard a mobile responsive
+
+.05
+| End blog basic functionality + autenticate & ?authorize
+.10
+| Blog mid fn(limit inputs, sec?, likes, repost_inwritter, isStore_writter) + ecommerc basic fn
+.15

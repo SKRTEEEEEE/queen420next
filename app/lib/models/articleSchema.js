@@ -13,6 +13,8 @@ const articleSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    cat: String,
+    img: String,
   },
   {
     timestamps: true,

@@ -37,8 +37,8 @@ export const addUser = async (formData) => {
       throw new Error('Failed to add user');
     }
   }
-  revalidatePath('/dashboard/users');
-  redirect('/dashboard/users');
+  revalidatePath('/main/dashboard/users');
+  redirect('/main/dashboard/users');
 };
 
 export const addProduct = async (formData) => {
@@ -60,8 +60,8 @@ export const addProduct = async (formData) => {
     console.log(err);
     throw new Error('Failed to add product');
   }
-  revalidatePath('/dashboard/products');
-  redirect('/dashboard/products');
+  revalidatePath('/main/dashboard/products');
+  redirect('/main/dashboard/products');
 };
 
 export const deleteProduct = async (formData) => {
@@ -75,7 +75,7 @@ export const deleteProduct = async (formData) => {
     throw new Error('Failed to delete product!');
   }
 
-  revalidatePath('/dashboard/products');
+  revalidatePath('/main/dashboard/products');
 };
 
 export const deleteUser = async (formData) => {
@@ -89,7 +89,7 @@ export const deleteUser = async (formData) => {
     throw new Error('Failed to delete user!');
   }
 
-  revalidatePath('/dashboard/products');
+  revalidatePath('/main/dashboard/products');
 };
 
 export const updateUser = async (formData) => {
@@ -120,8 +120,8 @@ export const updateUser = async (formData) => {
     throw new Error('Failed to update user!');
   }
 
-  revalidatePath('/dashboard/users');
-  redirect('/dashboard/users');
+  revalidatePath('/main/dashboard/users');
+  redirect('/main/dashboard/users');
 };
 
 export const updateProduct = async (formData) => {
@@ -151,22 +151,23 @@ export const updateProduct = async (formData) => {
     throw new Error('Failed to update product!');
   }
 
-  revalidatePath('/dashboard/products');
-  redirect('/dashboard/products');
+  revalidatePath('/main/dashboard/products');
+  redirect('/main/dashboard/products');
 };
 
 export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
-  console.log(formData);
+  console.log('formData:', formData);
 
   try {
-    //, redirect('/dashboard'), redirect(true)
+    console.log('Before signIn');
     await signIn('credentials', {
       username,
       password,
     });
+    console.log('After signIn');
   } catch (err) {
-    console.log(err);
-    return { error: `Wrong Credentials! ${err}` }; //<---Prob, esta aqui el problema
+    console.log('Error during signIn:', err);
+    return { error: `Wrong Credentials! ${err}` };
   }
 };
