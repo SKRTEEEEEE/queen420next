@@ -1,34 +1,17 @@
 // import styles from '@/app/ui/login/login.module.css';
 // //import { authenticate } from '../lib/actions';
+// import { redirect } from 'next/navigation';
+// import { auth } from '../auth';
 import LoginForm from '../ui/login/loginForm/loginForm';
 
-// const Login = () => {
-//   return (
-//     <div className={styles.container}>
-//       {/* <form action={authenticate} className={styles.form}>
-//         <h1>LogIn</h1>
-//         <input type="text" placeholder="username" name="username" />
-//         <input type="password" placeholder="password" name="password" />
-//         <button>START</button>
-//       </form> */}
-//       <LoginForm />
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-//import AcmeLogo from '@/app/ui/acme-logo';
-
 export default function LoginPage() {
+  // const user = await auth();
+  // if (user) {
+  //   redirect('/main');
+  // }
   return (
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        {/* <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-          <div className="w-32 text-white md:w-36">
-            <AcmeLogo />
-          </div>
-        </div> */}
         <LoginForm />
       </div>
     </main>

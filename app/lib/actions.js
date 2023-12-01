@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { ProductModel } from './models/productSchema';
 import { signIn } from '../auth';
 // import { useRouter } from 'next/navigation';
+// const router = useRouter();
 
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
@@ -155,6 +156,7 @@ export const updateProduct = async (formData) => {
   redirect('/main/dashboard/products');
 };
 
+/*
 export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
 
@@ -163,10 +165,33 @@ export const authenticate = async (formData) => {
       username,
       password,
     });
+
+    // Return a success object
+    return { success: true };
   } catch (error) {
-    if (error.message.includes('CredentialsSignin')) {
-      return { error: 'Wrong Signin Credentials' };
-    }
-    throw error;
+    // Return an error object
+    console.log(error);
+    return { error: 'Bad cred' };
+  }
+};
+*/
+export const authenticate = async (formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn('credentials', {
+      username,
+      password,
+      redirectTo: '/main',
+    });
+
+    console.log('Authentication successful');
+
+    return { success: true };
+  } catch (error) {
+    // Log detallado del error
+    console.error('Error during authentication:', error);
+
+    return { error: 'Bad cred' };
   }
 };

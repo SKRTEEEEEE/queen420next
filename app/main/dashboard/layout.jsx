@@ -5,8 +5,9 @@ import { auth } from '@/app/auth';
 import { redirect } from 'next/navigation';
 //import { isAdminAuth } from '@/app/lib/utils';
 
-const Layout = ({ children }) => {
-  const user = auth();
+const Layout = async ({ children }) => {
+  const user = await auth();
+  //console.log(user.isAdmin);
   if (!user.isAdmin) {
     redirect('/main');
   }

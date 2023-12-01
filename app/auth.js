@@ -35,7 +35,7 @@ export const { signIn, signOut, auth } = NextAuth({
           const user = await login(credentials);
           return user;
         } catch (err) {
-          console.log(err);
+          console.log(err); //<--- Aqui no sale error
           return null;
         }
       },

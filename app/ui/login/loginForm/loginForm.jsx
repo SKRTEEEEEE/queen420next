@@ -5,13 +5,16 @@ import styles from './loginForm.module.css';
 // import { useFormState } from 'react-dom';
 import { useState } from 'react';
 import Link from 'next/link';
+// import { useRouter } from 'next/navigation';
+// const router = useRouter();
 
 const LoginForm = () => {
   const [err, setErr] = useState();
   const handleLogin = async (formData) => {
     const data = await authenticate(formData);
+
     console.log(data);
-    data.error && setErr(data.error);
+    data?.error && setErr(data?.error);
   };
 
   return (
