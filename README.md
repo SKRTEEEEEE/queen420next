@@ -145,6 +145,7 @@ Create the structure of the v.01 blog. Maked elements responsive with tailwind b
 _*Till this point im going to try to fix the error of authorize, doing it again*_
 DEBUGGED!?
 _*The error will disaper when in signIn function inside autenticate you put redirect: false*_
+BRANCH GIT ERROR.
 
 **HAY QUE HACER LAS COSAS MOBILE RESP.!!**
 
