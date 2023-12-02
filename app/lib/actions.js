@@ -179,19 +179,21 @@ export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
 
   try {
-    await signIn('credentials', {
+    const result = await signIn('credentials', {
       username,
       password,
-      redirectTo: '/main',
+      redirect: false,
     });
 
-    console.log('Authentication successful');
+    if (result.error) {
+      console.error('Error during signIn:', result.error);
+      return { error: result.error };
+    }
 
+    console.log('Authentication successful');
     return { success: true };
   } catch (error) {
-    // Log detallado del error
     console.error('Error during authentication:', error);
-
     return { error: 'Bad cred' };
   }
 };
