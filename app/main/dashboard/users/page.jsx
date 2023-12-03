@@ -53,7 +53,9 @@ const UsersPage = async ({ searchParams }) => {
                     ? user.createdAt.toString().slice(4, 16)
                     : 'No Info'}
                 </td>
-                <td>{user.isAdmin ? 'Admin' : 'Client'}</td>
+                <td>
+                  {user.isAdmin ? 'Admin' : user.isStore ? 'Store' : 'Client'}
+                </td>
                 <td>
                   <Link href={`/main/dashboard/users/${user.id}`}>
                     <button className="w-20 bg-teal-500 text-white rounded-md cursor-pointer">

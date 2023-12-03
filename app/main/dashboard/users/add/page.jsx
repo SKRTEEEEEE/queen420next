@@ -24,6 +24,11 @@ const AddUserPage = () => {
           <option value={true}>Yes</option>
           <option value={false}>No</option>
         </select>
+        <select name="isStore" id="isStore">
+          <option value={true}>Is Strore?</option>
+          <option value={true}>Yes</option>
+          <option value={false}>No</option>
+        </select>
         <textarea
           name="address"
           id="address"

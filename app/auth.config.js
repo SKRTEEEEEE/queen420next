@@ -2,7 +2,6 @@ export const authConfig = {
   pages: {
     signIn: '/login',
   },
-  //PROBLEMA AQUI?
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       console.log('isLoggedIn:', !!auth?.user);

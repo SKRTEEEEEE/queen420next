@@ -9,7 +9,6 @@ const SingleArticlePage = async ({ params }) => {
 
   return (
     <div className="flex">
-      {/* Sección 1: Título, Autor e Imagen */}
       <div className="xl:flex-col flex-wrap w-screen">
         <div className="xl:flex sm:h-screen">
           <div className="w-full sm:w-2/4 justify-center ">
@@ -23,19 +22,22 @@ const SingleArticlePage = async ({ params }) => {
                 />
                 <span>{article.author}</span>
               </div>
-              {/* Puedes agregar estilos futuristas aquí */}
             </div>
-            <Comentary />
+            <Comentary articleId={id} />
+            {/* Mostrar los comentarios */}
+            {article.comments.map((comment) => (
+              <div key={comment._id}>
+                {/* Mostrar el contenido del comentario, autor, etc. */}
+                <p>{comment.content}</p>
+                <p>By: {comment.author}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Sección 2: Texto del artículo */}
           <div className="bg-yellow-800 w-screen p-8 sm:h-screen flex">
             <ArticleContent content={article.content} />
-            {/* Puedes agregar estilos futuristas aquí */}
           </div>
         </div>
-
-        {/* Imagen como "footer" en la parte inferior izquierda */}
         <div className="xl:fixed w-max h-40 bottom-0 left-0">
           <Image
             src={article.img || '/noproduct.jpg'}
@@ -46,8 +48,6 @@ const SingleArticlePage = async ({ params }) => {
           />
         </div>
       </div>
-
-      {/* Sección 4: Comentarios */}
     </div>
   );
 };

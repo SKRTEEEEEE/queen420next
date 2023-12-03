@@ -16,10 +16,9 @@ A fully functional big app with various features and Web3 integration.
    - [Learn More](#learn-more)
    - [Deploy on Vercel](#deploy-on-vercel)
 3. [Process](#process)
-   - [1.01 DASHBOARD UI&Link](#101-dashboard)
-   - [1.02 MongoDb Connection](#102-mongodb-connection)
-   - [1.03 Dashboard Backend](#103-dashboard-backend)
-   - [1.04 Start of Blog](#104-start-of-blog)
+
+   - [1.01 Start](#101-start)
+
 4. [Tareas](#tareas)
 
 # Objective
@@ -98,7 +97,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Process
 
-## 1.01 DASHBOARD
+## 1.01 Start 11/2023
 
 ### .01 Dashboard UI&Link
 
@@ -141,18 +140,36 @@ Started creating the basic structure for the blog. Established a connection to t
 
 ### .05 Blog UI&Link
 
-Create the structure of the v.01 blog. Maked elements responsive with tailwind but no end the final UI.
+Create the structure of the basic blog. Maked elements responsive with tailwind, no final UI.
+Protected routes for dashboard.
+
+- ReactQuill for style Articles
+
+```bash
+npm i react-quill
+```
+
 _*Till this point im going to try to fix the error of authorize, doing it again*_
-DEBUGGED!?
+DEBUGGED!
 _*The error will disaper when in signIn function inside autenticate you put redirect: false*_
 
-**HAY QUE HACER LAS COSAS MOBILE RESP.!!**
+### .06 Blog Back-p1
+
+Starting to make database models relational.
+Maked that admin can change passwords.
+Created the article and comment post (basic). Both related and with a separate collection. Rendered the comments of each article on its page.
 
 # **TAREAS**
 
-- Hay que ir haciendo el diagrama de la estructura de la web
+**HAY QUE HACER LAS COSAS MOBILE RESP.!!**
 
-- Hay que arreglar lo de la autentificacion y la autorizacion al dashboard
+BLOG BACK-P2
+
+- Hay que hacer la fun de dar likes a comments y articulos, mostrar likes en coments y articulos, mostrar coments en articulos
+- Hay que hacer la fun de repost
+- Hay que hacer la fun de vista de los coments funcional
+
+- Hay que ir haciendo el diagrama de la estructura de la web
 - Hay que pasar el dashboard a mobile responsive
 
 .05

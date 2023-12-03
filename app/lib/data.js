@@ -7,7 +7,7 @@ import { ArticleModel } from './models/articleSchema';
 
 export const fetchArticle = async (id) => {
   connectToDB();
-  const article = await ArticleModel.findById(id);
+  const article = await ArticleModel.findById(id).populate('comments');
   //console.log(article);
   return article;
 };

@@ -5,7 +5,7 @@ import MenuLink from '../dashboard/sidebar/menuLink/menuLink';
 import { MdLogout } from 'react-icons/md';
 export default async function Navbar() {
   const user = await auth();
-  console.log('the user in navbar:', user);
+  // console.log('the user in navbar:', user);
 
   return (
     <header className=" flex sm:space-x-20 md:space-x-10 justify-center items-center bg-red-600">

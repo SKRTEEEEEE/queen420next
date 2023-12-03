@@ -9,12 +9,38 @@ const articleSchema = new mongoose.Schema(
     summary: String,
     content: String,
     cover: String,
-    author: {
-      type: String,
+    author: String,
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User', // Referencia al modelo User
       required: true,
     },
     cat: String,
     img: String,
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment', // Referencia al modelo Comment
+      },
+    ],
+    fixedComments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment', // Referencia al modelo Comment
+      },
+    ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Referencia al modelo User
+      },
+    ],
+    reposts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Referencia al modelo User
+      },
+    ],
   },
   {
     timestamps: true,

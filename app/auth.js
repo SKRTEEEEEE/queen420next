@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+//import GoogleProvider from 'next-auth/providers/google';
 import { authConfig } from './auth.config';
 import { connectToDB } from './lib/utils';
 import { UserModel } from './lib/models/userSchema';
@@ -29,13 +30,17 @@ const login = async (credentials) => {
 export const { signIn, signOut, auth } = NextAuth({
   ...authConfig,
   providers: [
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       async authorize(credentials) {
         try {
           const user = await login(credentials);
           return user;
         } catch (err) {
-          console.log(err); //<--- Aqui no sale error
+          console.log(err);
           return null;
         }
       },
@@ -48,6 +53,7 @@ export const { signIn, signOut, auth } = NextAuth({
         token.username = user.username;
         token.img = user.img;
         token.isAdmin = user.isAdmin;
+        token.id = user._id; // <- Parece que se vincula correctamente en MongoDb
       }
       return token;
     },
@@ -56,6 +62,7 @@ export const { signIn, signOut, auth } = NextAuth({
         session.username = token.username;
         session.img = token.img;
         session.isAdmin = token.isAdmin;
+        session.id = token.id;
       }
       return session;
     },

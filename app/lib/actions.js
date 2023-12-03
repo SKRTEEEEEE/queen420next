@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { ProductModel } from './models/productSchema';
 import { signIn } from '../auth';
+import { ArticleModel } from './models/articleSchema';
+import { CommentModel } from './models/commentSchema';
 // import { useRouter } from 'next/navigation';
 // const router = useRouter();
 
@@ -55,6 +57,7 @@ export const addProduct = async (formData) => {
       stock,
       color,
       size,
+      cathegory,
     });
     await newProduct.save();
   } catch (err) {
@@ -63,6 +66,98 @@ export const addProduct = async (formData) => {
   }
   revalidatePath('/main/dashboard/products');
   redirect('/main/dashboard/products');
+};
+export const addArticle = async (formData) => {
+  try {
+    connectToDB();
+
+    const { title, cat, content, author, authorId } =
+      Object.fromEntries(formData);
+    console.log('FormData:', title, cat, content, author, authorId);
+
+    // Busca un artículo existente con el mismo título y autorId
+    const existingArticle = await ArticleModel.findOne({ title, authorId });
+
+    if (existingArticle) {
+      // Si ya existe un artículo con el mismo título y autorId, no lo vuelvas a crear
+      console.log('Article with the same title and authorId already exists');
+      // Puedes lanzar una excepción, redirigir o manejar esto según tus necesidades
+      return;
+    }
+
+    // Si no hay un artículo existente, crea uno nuevo
+    const newArticle = new ArticleModel({
+      title,
+      cat,
+      content,
+      author,
+      authorId,
+    });
+
+    const savedArticle = await newArticle.save();
+
+    const newComment = new CommentModel({
+      content: 'Dime tu opinion de mi articulo!',
+      authorId,
+      author,
+    });
+    await newComment.save();
+
+    // Asocia el comentario al artículo recién creado
+    savedArticle.comments.push(newComment);
+
+    // Guarda el artículo nuevamente para reflejar la asociación del comentario
+    await savedArticle.save();
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to add article');
+  }
+
+  revalidatePath('/main/agora');
+  redirect('/main/agora');
+};
+
+export const addComment = async ({
+  content,
+  author,
+  authorId,
+  articleId,
+  likes,
+}) => {
+  try {
+    connectToDB();
+
+    // Verifica si el artículo existe
+    const article = await ArticleModel.findById(articleId);
+    if (!article) {
+      throw new Error('Article not found');
+    }
+
+    // console.log(content, author, authorId, articleId);
+
+    // Crea el nuevo comentario
+    const newComment = new CommentModel({
+      content,
+      author,
+      authorId,
+      likes,
+    });
+
+    // Guarda el comentario en la base de datos
+    const savedComment = await newComment.save();
+
+    // Asocia el comentario al artículo
+    article.comments.push(savedComment._id);
+
+    // Guarda el artículo nuevamente para reflejar la asociación del comentario
+    await article.save();
+
+    //return savedComment;
+  } catch (err) {
+    console.error(err);
+    throw new Error('Failed to add comment');
+  }
+  //revalidatePath();
 };
 
 export const deleteProduct = async (formData) => {
@@ -103,16 +198,26 @@ export const updateUser = async (formData) => {
     const updateFields = {
       username,
       email,
-      password,
       phone,
       address,
       isAdmin,
       isActive,
     };
 
+    // Verificar si se proporciona una nueva contraseña
+    if (password) {
+      // Generar el hash de la nueva contraseña utilizando bcrypt
+      const saltRounds = 10; // Puedes ajustar el número de rondas según tus necesidades
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+      // Almacenar el hash en lugar de la contraseña sin cifrar
+      updateFields.password = hashedPassword;
+    }
+
     Object.keys(updateFields).forEach(
       (key) =>
-        (updateFields[key] === '' || undefined) && delete updateFields[key]
+        (updateFields[key] === '' || updateFields[key] === undefined) &&
+        delete updateFields[key]
     );
 
     await UserModel.findByIdAndUpdate(id, updateFields);

@@ -46,6 +46,15 @@ const SingleUserPage = async ({ params }) => {
               No
             </option>
           </select>
+          <label>Is Store?</label>
+          <select name="isStore" id="isStore">
+            <option value={true} selected={user.isStore}>
+              Yes
+            </option>
+            <option value={false} selected={!user.isStore}>
+              No
+            </option>
+          </select>
           <button>Update</button>
         </form>
       </div>
