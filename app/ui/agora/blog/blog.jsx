@@ -8,6 +8,7 @@ export default async function Blog({ searchParams }) {
   const q = searchParams?.q || '';
   const page = searchParams?.page || 1;
   const cat = searchParams?.cat || '';
+
   const { count, articles } = await fetchArticles(cat, q, page);
 
   return (

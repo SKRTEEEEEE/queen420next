@@ -16,10 +16,12 @@ A fully functional big app with various features and Web3 integration.
    - [Learn More](#learn-more)
    - [Deploy on Vercel](#deploy-on-vercel)
 3. [Process](#process)
-
    - [1.01 Start](#101-start)
-
-4. [Tareas](#tareas)
+4. [ToDo](#works)
+   - [Remember](#remember)
+   - [Future versions](#future-versions)
+   - [Whitout version](#whitout-version)
+   - [Route](#route)
 
 # Objective
 
@@ -140,7 +142,7 @@ Started creating the basic structure for the blog. Established a connection to t
 
 ### .05 Blog UI&Link
 
-Create the structure of the basic blog. Maked elements responsive with tailwind, no final UI.
+Create the structure of the basic blog. Maked elements responsive with tailwind.
 Protected routes for dashboard.
 
 - ReactQuill for style Articles
@@ -155,22 +157,49 @@ _*The error will disaper when in signIn function inside autenticate you put redi
 
 ### .06 Blog Back-p1
 
-Starting to make database models relational.
+Starting to make database models relational using objectId.
 Maked that admin can change passwords.
 Created the article and comment post (basic). Both related and with a separate collection. Rendered the comments of each article on its page.
 
-# **TAREAS**
+### .07 Blog Back-p2
+
+Maked that user can give like to article and to comments of the article. Show and refresh new data. Saving it relational and not using hooks or client actions. Same for reposts.
+Added to author page the articles that he has reposted and show to another people.
+
+# **WORKS**
+
+## Remember
 
 **HAY QUE HACER LAS COSAS MOBILE RESP.!!**
 
-BLOG BACK-P2
+## Future versions
 
-- Hay que hacer la fun de dar likes a comments y articulos, mostrar likes en coments y articulos, mostrar coments en articulos
-- Hay que hacer la fun de repost
+BLOG BACK-P3
+
+- Hay que permitir al usuario colgar una foto, un gif y un sonido si lo desea.
+- Limitar is.Store hacer articles y tener articles page"ruta" (?Backend, rutas, links...?)
+
+- ?Utilizarlo en el frontend?
+
+AUTH BASICS
+
+- Permitir al usuario logearse con usuario o telefono
+- Permitir al usuario recuperar su contraseña si la ha olvidado(?a traves tel, a traves mail?)
+- Limitar e obligar a introducir ciertos parametros en el usuario y la contraseña
+
+BLOG UI&LINK-P2
+
 - Hay que hacer la fun de vista de los coments funcional
+- Hay que pasar el dashboard a mobile responsive
+- Terminar de pasar los elementos de css a tailwind y eliminar todo el css
+
+## Without version
+
+OTHER
 
 - Hay que ir haciendo el diagrama de la estructura de la web
-- Hay que pasar el dashboard a mobile responsive
+
+## Route
 
 .05
 | End blog basic functionality + autenticate & ?authorize

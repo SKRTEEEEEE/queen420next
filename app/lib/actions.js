@@ -8,6 +8,7 @@ import { ProductModel } from './models/productSchema';
 import { signIn } from '../auth';
 import { ArticleModel } from './models/articleSchema';
 import { CommentModel } from './models/commentSchema';
+// import mongoose from 'mongoose';
 // import { useRouter } from 'next/navigation';
 // const router = useRouter();
 
@@ -117,6 +118,191 @@ export const addArticle = async (formData) => {
   redirect('/main/agora');
 };
 
+export const repostArticle = async (articleId, userId, username) => {
+  try {
+    connectToDB();
+
+    const article = await ArticleModel.findById(articleId);
+    // Verifica si el usuario ya ha dado repost al artículo
+    const isUserAlreadyReposted = article.reposts.some(
+      (repost) => String(repost.userId) === String(userId)
+    );
+
+    if (isUserAlreadyReposted) {
+      throw new Error('User has already reposted this article');
+    }
+
+    // Agrega el nuevo repost al array de reposts del artículo
+    article.reposts.push({
+      userId: userId,
+      username: username,
+    });
+
+    // Actualiza el artículo en la base de datos
+    await ArticleModel.updateOne(
+      { _id: articleId },
+      { reposts: article.reposts }
+    );
+
+    console.log('Like added successfully');
+  } catch (error) {
+    console.error('Error adding repost to article: ', error.message);
+    throw new Error('Failed to add repost to article');
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
+export const disrepostArticle = async (articleId, userId) => {
+  try {
+    connectToDB();
+
+    const article = await ArticleModel.findById(articleId);
+    if (!article) {
+      throw new Error('Article not found');
+    }
+
+    // Busca el índice del usuario en el array de "reposts"
+    const userRepostIndex = article.reposts.findIndex(
+      (repost) => String(repost.userId) === String(userId)
+    );
+
+    if (userRepostIndex === -1) {
+      throw new Error('User has not given repost to this article');
+    }
+
+    // Elimina el "repost" del array de "reposts"
+    article.reposts.splice(userRepostIndex, 1);
+
+    // Guarda los cambios en la base de datos
+    await article.save();
+
+    console.log('Repost removed successfully');
+  } catch (error) {
+    console.error('Error removing repost:', error.message);
+  } finally {
+    // Cierra la conexión a la base de datos
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
+export const addLikeArticle = async (articleId, userId) => {
+  try {
+    connectToDB();
+    const article = await ArticleModel.findById(articleId);
+    if (!article) {
+      throw new Error('Article not found');
+    }
+
+    // Verifica si el usuario ya ha dado like al comentario
+    if (article.likes.includes(userId)) {
+      throw new Error('User has already liked this article');
+    }
+
+    // Agrega el ID del usuario al array de likes del comentario
+    article.likes.push(userId);
+
+    // Actualiza el comentario en la base de datos
+    await ArticleModel.updateOne({ _id: articleId }, { likes: article.likes });
+
+    console.log('Like added successfully');
+  } catch (error) {
+    console.error('Error adding like to article: ', error.message);
+    throw new Error('Failed to add like to article');
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
+export const dislikeArticle = async (articleId, userId) => {
+  try {
+    connectToDB();
+
+    const article = await ArticleModel.findById(articleId);
+    if (!article) {
+      throw new Error('Article not found');
+    }
+
+    // Verifica si el usuario ya ha dado like al articulo
+    if (!article.likes.includes(userId)) {
+      throw new Error('User has not given like to this article');
+    }
+
+    // Elimina el userId del array de likes
+    article.likes = article.likes.filter(
+      (id) => id.toString() !== userId.toString()
+    );
+
+    await article.save();
+    console.log('Like added successfully');
+  } catch (error) {
+    console.error('Error adding like to article: ', error.message);
+    throw new Error('Failed to add like to article');
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
+export const addLikeComment = async (commentId, userId) => {
+  try {
+    connectToDB();
+
+    // Verifica si el comentario existe
+    console.log('comment _id: ', commentId);
+    console.log('user id: ', userId);
+    // Ejemplo de cómo podrías verificar y convertir el ID si es necesario
+
+    const comment = await CommentModel.findById(commentId);
+    if (!comment) {
+      throw new Error('Comment not found');
+    }
+
+    // Verifica si el usuario ya ha dado like al comentario
+    if (comment.likes.includes(userId)) {
+      throw new Error('User has already liked this comment');
+    }
+
+    // Agrega el ID del usuario al array de likes del comentario
+    comment.likes.push(userId);
+
+    // Actualiza el comentario en la base de datos
+    await CommentModel.updateOne({ _id: commentId }, { likes: comment.likes });
+
+    console.log('Like added successfully');
+  } catch (error) {
+    console.error('Error adding like to comment: ', error.message);
+    throw new Error('Failed to add like to comment');
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
+export const dislikeComment = async (commentId, userId) => {
+  try {
+    connectToDB(); // Assuming connectToDB is a function that connects to your database
+
+    const comment = await CommentModel.findById(commentId);
+
+    if (!comment) {
+      throw new Error('Comment not found');
+    }
+
+    if (!comment.likes.includes(userId)) {
+      throw new Error('User has not given like to this comment');
+    }
+
+    // Remove the userId from the likes array
+    comment.likes = comment.likes.filter(
+      (id) => id.toString() !== userId.toString()
+    );
+
+    // Save the updated comment
+    await comment.save();
+
+    console.log(`Comment disliked by user ${userId}`);
+  } catch (error) {
+    console.error('Error giving dislike to comment: ', error.message);
+    throw new Error('Failed to dislike comment');
+  }
+  revalidatePath('/main/agora/[author]/[id]', 'page');
+};
+
 export const addComment = async ({
   content,
   author,
@@ -145,19 +331,14 @@ export const addComment = async ({
 
     // Guarda el comentario en la base de datos
     const savedComment = await newComment.save();
-
     // Asocia el comentario al artículo
     article.comments.push(savedComment._id);
-
-    // Guarda el artículo nuevamente para reflejar la asociación del comentario
     await article.save();
-
-    //return savedComment;
   } catch (err) {
     console.error(err);
     throw new Error('Failed to add comment');
   }
-  //revalidatePath();
+  revalidatePath('/main/agora/[author]/[id]', 'page');
 };
 
 export const deleteProduct = async (formData) => {
@@ -261,25 +442,6 @@ export const updateProduct = async (formData) => {
   redirect('/main/dashboard/products');
 };
 
-/*
-export const authenticate = async (formData) => {
-  const { username, password } = Object.fromEntries(formData);
-
-  try {
-    await signIn('credentials', {
-      username,
-      password,
-    });
-
-    // Return a success object
-    return { success: true };
-  } catch (error) {
-    // Return an error object
-    console.log(error);
-    return { error: 'Bad cred' };
-  }
-};
-*/
 export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
 

@@ -19,22 +19,52 @@ export const fetchArticlesbyAuthor = async (author, cat, q, page) => {
   const ITEMS_PAGE = 3;
   try {
     connectToDB();
-    const count = await ArticleModel.find({
+    const countAuthor = await ArticleModel.find({
       title: { $regex: regex },
       cat: { $regex: catRegex },
       author: author,
     }).count();
-    const articles = await ArticleModel.find({
+    const articlesAuthor = await ArticleModel.find({
       title: { $regex: regex },
       cat: { $regex: catRegex },
       author: author,
     })
       .limit(ITEMS_PAGE)
       .skip(ITEMS_PAGE * (page - 1));
-    return { count, articles };
+    return { countAuthor, articlesAuthor };
   } catch (err) {
     console.log(err);
-    throw new Error('Failed to fetch Users');
+    throw new Error('Failed to fetch Articles by Author');
+  }
+};
+
+export const fetchArticlesReposted = async (author, cat, q, page) => {
+  // En caso de llegar "q" un querry, la función find solo buscará el usuario "regex" que será lo que se busque en el querry
+  const regex = new RegExp(q, 'i');
+  const catRegex = new RegExp(cat, 'i');
+  const ITEMS_PAGE = 3;
+  try {
+    connectToDB();
+    const countReposted = await ArticleModel.find({
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
+      author: { $ne: author }, // No igual a la variable author
+      'reposts.username': author, // Agrega la condición para el username en reposts
+    }).count();
+
+    const articlesReposted = await ArticleModel.find({
+      title: { $regex: regex },
+      cat: { $regex: catRegex },
+      author: { $ne: author }, // No igual a la variable author
+      'reposts.username': author, // Agrega la condición para el username en reposts
+    })
+      .limit(ITEMS_PAGE)
+      .skip(ITEMS_PAGE * (page - 1));
+
+    return { countReposted, articlesReposted };
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to fetch Articles Reposted');
   }
 };
 
@@ -60,7 +90,7 @@ export const fetchArticles = async (cat, q, page) => {
     return { count, articles };
   } catch (err) {
     console.log(err);
-    throw new Error('Failed to fetch Users');
+    throw new Error('Failed to fetch Articles');
   }
 };
 

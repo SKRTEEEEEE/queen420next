@@ -1,18 +1,37 @@
-import { fetchArticlesbyAuthor } from '@/app/lib/data';
+// import { auth } from '@/app/auth';
+import { fetchArticlesReposted, fetchArticlesbyAuthor } from '@/app/lib/data';
 import Categories from '@/app/ui/agora/blog/categories';
 import Pagination from '@/app/ui/dashboard/pagination/pagination';
 import Search from '@/app/ui/dashboard/search/search';
 import Link from 'next/link';
 import { GrAddCircle } from 'react-icons/gr';
 
-const SingleArticlePage = async ({ params, searchParams }) => {
+const AgoraAuthor = async ({ params, searchParams }) => {
   const q = searchParams?.q || '';
   const page = searchParams?.page || 1;
   const cat = searchParams?.cat || '';
   const { author } = params;
   const authorCapital = author.toUpperCase();
-  const { count, articles } = await fetchArticlesbyAuthor(author, cat, q, page);
-
+  // const user = await auth();
+  // const userId = user.id;
+  // console.log(userId);
+  // const { countReposted, articlesReposted } =
+  const { countReposted, articlesReposted } = await fetchArticlesReposted(
+    author,
+    cat,
+    q,
+    page
+  );
+  const { countAuthor, articlesAuthor } = await fetchArticlesbyAuthor(
+    author,
+    cat,
+    q,
+    page
+  );
+  console.log(countReposted, articlesReposted);
+  const count = countAuthor;
+  +countReposted;
+  const articles = [...articlesAuthor, ...articlesReposted];
   return (
     <div className="flex h-screen sm:p-4 bg-white ">
       <div className="mx-auto max-w-7xl sm:p-4 md:px-4 lg:px-8">
@@ -86,4 +105,4 @@ const SingleArticlePage = async ({ params, searchParams }) => {
   );
 };
 
-export default SingleArticlePage;
+export default AgoraAuthor;

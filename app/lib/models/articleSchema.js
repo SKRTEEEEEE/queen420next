@@ -35,12 +35,23 @@ const articleSchema = new mongoose.Schema(
         ref: 'User', // Referencia al modelo User
       },
     ],
-    reposts: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Referencia al modelo User
-      },
-    ],
+
+    reposts: {
+      type: [
+        {
+          userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User', // Referencia al modelo User
+            required: true,
+          },
+          username: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,
