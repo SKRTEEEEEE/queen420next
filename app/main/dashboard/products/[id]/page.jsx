@@ -1,18 +1,57 @@
+// 'use client';
+
 import { updateProduct } from '@/app/lib/actions';
 import { fetchProduct } from '@/app/lib/data';
+// import useFileUpdate from '@/app/lib/utils/updateFileFirebase';
+
 import styles from '@/app/ui/dashboard/products/singleProduct/singleProduct.module.css';
 import Image from 'next/image';
+// import { useState } from 'react';
 
 const SingleProductPage = async ({ params }) => {
   const { id } = params;
   const product = await fetchProduct(id);
+  // const [fileImg, setFileImg] = useState(null);
+  // const [img, setImg] = useState(product.img);
+
+  // const onSuccessImg = (downloadURL) => {
+  //   setImg(downloadURL);
+  // };
+
+  // const onErrorImg = (error) => {
+  //   console.error('Error during img upload:', error);
+  // };
+
+  // // useFileUpdate(fileImg, product.img, onSuccessImg, onErrorImg);
+
+  // const updateProductAction = updateProduct.bind(null, img);
+
+  // const handleFileChange = (e) => {
+  //   setFileImg(e.target.files[0]);
+  // };
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src="/noavatar.png" alt="" fill />
+          <Image
+            src={product.img ? product.img : '/noavatar.png'}
+            alt=""
+            fill
+          />
         </div>
         {product.title}
+        {/* <input type="file" onChange={handleFileChange} id="image" />
+        <button
+          onClick={useFileUpdate(
+            fileImg,
+            product.img,
+            onSuccessImg,
+            onErrorImg
+          )}
+        >
+          Uplaod Photo
+        </button> */}
       </div>
       <div className={styles.formContainer}>
         <form action={updateProduct} className={styles.form}>

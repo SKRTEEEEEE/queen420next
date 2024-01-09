@@ -1,6 +1,5 @@
 import Pagination from '@/app/ui/dashboard/pagination/pagination';
 import Search from '@/app/ui/dashboard/search/search';
-import styles from '@/app/ui/dashboard/products/products.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { fetchProducts } from '@/app/lib/data';
@@ -11,47 +10,6 @@ const ProductsPage = async ({ searchParams }) => {
   const page = searchParams?.page || 1;
   const { count, products } = await fetchProducts(q, page);
   return (
-    // <div className={styles.container}>
-    //   <div className={styles.top}>
-    //     <Search placeholder="Search for a product" />
-    //     <Link href="/main/dashboard/products/add">
-    //       <button className={styles.addButton}>Add New Product</button>
-    //     </Link>
-    //   </div>
-    //   <table className={styles.table}>
-    //     <thead>
-    //       <tr>
-    //         <td>Title</td>
-    //         <td>Description</td>
-    //         <td>Price</td>
-    //         <td>Created At</td>
-    //         <td>Stock</td>
-    //         <td>Action</td>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {products.map((product) => (
-    //         <tr key={product.id}>
-
-    //           <td>
-    //             <Link href={`/main/dashboard/products/${product.id}`}>
-    //               <button className={`${styles.button} ${styles.view}`}>
-    //                 View
-    //               </button>
-    //             </Link>
-    //             <form action={deleteProduct}>
-    //               <input type="hidden" name="id" value={product.id} />
-    //               <button className={`${styles.button} ${styles.delete}`}>
-    //                 Delete
-    //               </button>
-    //             </form>
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    //   <Pagination className="" count={count} ITEMS_PAGE={2} />
-    // </div>
     <div className="p-2 max-h-screen bg-bgSoft">
       <div className="flex flex-col md:flex-row items-center justify-between mb-4">
         <Search placeholder="Search the product" />
@@ -100,6 +58,7 @@ const ProductsPage = async ({ searchParams }) => {
                   </Link>
                   <form action={deleteProduct}>
                     <input type="hidden" name="id" value={product.id} />
+                    <input type="hidden" name="img" value={product.img} />
                     <button className="w-20 bg-red-800 text-white rounded-md cursor-pointer">
                       Delete
                     </button>

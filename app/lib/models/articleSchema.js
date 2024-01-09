@@ -17,6 +17,8 @@ const articleSchema = new mongoose.Schema(
     },
     cat: String,
     img: String,
+    gif: String,
+    audio: String,
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

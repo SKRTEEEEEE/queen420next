@@ -8,6 +8,7 @@ import { ProductModel } from './models/productSchema';
 import { signIn } from '../auth';
 import { ArticleModel } from './models/articleSchema';
 import { CommentModel } from './models/commentSchema';
+import { useFileDelete } from './utils/deleteFileFirebase';
 // import mongoose from 'mongoose';
 // import { useRouter } from 'next/navigation';
 // const router = useRouter();
@@ -45,7 +46,7 @@ export const addUser = async (formData) => {
   redirect('/main/dashboard/users');
 };
 
-export const addProduct = async (formData) => {
+export const addProduct = async (img, formData) => {
   const { title, desc, price, stock, color, size, cathegory } =
     Object.fromEntries(formData);
 
@@ -59,6 +60,7 @@ export const addProduct = async (formData) => {
       color,
       size,
       cathegory,
+      img,
     });
     await newProduct.save();
   } catch (err) {
@@ -72,9 +74,25 @@ export const addArticle = async (formData) => {
   try {
     connectToDB();
 
-    const { title, cat, content, author, authorId } =
+    const { title, cat, content, author, authorId, img, gif } =
       Object.fromEntries(formData);
-    console.log('FormData:', title, cat, content, author, authorId);
+    // console.log(
+    //   'FormData Article:',
+    //   'Title:',
+    //   title,
+    //   'Category:',
+    //   cat,
+    //   'Content:',
+    //   content,
+    //   'Author:',
+    //   author,
+    //   'Author ID:',
+    //   authorId,
+    //   'Image URL:',
+    //   img,
+    //   'GIF URL:',
+    //   gif
+    // );
 
     // Busca un artículo existente con el mismo título y autorId
     const existingArticle = await ArticleModel.findOne({ title, authorId });
@@ -93,22 +111,26 @@ export const addArticle = async (formData) => {
       content,
       author,
       authorId,
+      img,
+      gif,
     });
 
     const savedArticle = await newArticle.save();
 
-    const newComment = new CommentModel({
-      content: 'Dime tu opinion de mi articulo!',
-      authorId,
-      author,
-    });
-    await newComment.save();
+    //Añadir comentario predeterminado
+    // const newComment = new CommentModel({
+    //   content: 'Dime tu opinion de mi articulo!',
+    //   authorId,
+    //   author,
+    // });
+    // await newComment.save();
 
-    // Asocia el comentario al artículo recién creado
-    savedArticle.comments.push(newComment);
+    // // Asocia el comentario al artículo recién creado
+    // savedArticle.comments.push(newComment);
 
-    // Guarda el artículo nuevamente para reflejar la asociación del comentario
-    await savedArticle.save();
+    // // Guarda el artículo nuevamente para reflejar la asociación del comentario
+    // await savedArticle.save();
+    console.log('Saved Article: ', savedArticle);
   } catch (err) {
     console.log(err);
     throw new Error('Failed to add article');
@@ -342,10 +364,13 @@ export const addComment = async ({
 };
 
 export const deleteProduct = async (formData) => {
-  const { id } = Object.fromEntries(formData);
+  const { id, img } = Object.fromEntries(formData);
 
   try {
     connectToDB();
+    if (img) {
+      useFileDelete('products', img);
+    }
     await ProductModel.findByIdAndDelete(id);
   } catch (err) {
     console.log(err);
@@ -367,6 +392,26 @@ export const deleteUser = async (formData) => {
   }
 
   revalidatePath('/main/dashboard/products');
+};
+export const deleteArticle = async (id, imgName, gifName) => {
+  // const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+    if (imgName) {
+      await useFileDelete('images', imgName);
+    }
+    if (gifName) {
+      await useFileDelete('images', gifName);
+    }
+    await ArticleModel.findByIdAndDelete(id);
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to delete article!');
+  }
+
+  revalidatePath('/main/agora');
+  redirect('/main/agora');
 };
 
 export const updateUser = async (formData) => {
@@ -411,9 +456,10 @@ export const updateUser = async (formData) => {
   redirect('/main/dashboard/users');
 };
 
-export const updateProduct = async (formData) => {
+export const updateProduct = async (img, formData) => {
   const { id, title, desc, price, stock, color, size } =
     Object.fromEntries(formData);
+  console.log('formData: ', formData, 'img: ', img);
 
   try {
     connectToDB();
@@ -425,6 +471,7 @@ export const updateProduct = async (formData) => {
       stock,
       color,
       size,
+      img,
     };
 
     Object.keys(updateFields).forEach(

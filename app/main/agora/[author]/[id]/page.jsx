@@ -1,10 +1,12 @@
 import { auth } from '@/app/auth';
+import { deleteArticle } from '@/app/lib/actions';
 import { fetchArticle } from '@/app/lib/data';
 import ArticleContent from '@/app/ui/agora/blog/articleContent';
 import Comentary from '@/app/ui/agora/blog/comentary';
 import LikeArticle from '@/app/ui/agora/blog/likeArticle';
 import LikeComments from '@/app/ui/agora/blog/likeComments';
 import RepostArticle from '@/app/ui/agora/blog/repostArticle';
+import ErrorComponent from '@/app/ui/main/errorComponent';
 // import SeeComments from '@/app/ui/agora/blog/seeComments';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,14 +14,21 @@ import Link from 'next/link';
 import { BsCalendarDate } from 'react-icons/bs';
 import { FaUserNinja } from 'react-icons/fa';
 // import { addLikeComment } from '@/app/lib/actions';
+import { MdDelete } from 'react-icons/md';
 
 const SingleArticlePage = async ({ params }) => {
   const { id } = params;
   const article = await fetchArticle(id);
   //Filtramos los comentarios asociados a este articulo
-  const comments = article.comments
+  const comments = article?.comments
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Ordenar por fecha de creación, de más reciente a más antiguo
     .slice(0, 4); // Limitar a 4 comentarios
+
+  if (!article || !article.comments) {
+    // Manejar el caso en el que no se pueda recuperar el artículo o no tenga comentarios
+    console.error('No se pudo cargar el artículo o no tiene comentarios.');
+    return <ErrorComponent />;
+  }
 
   const user = await auth();
 
@@ -31,6 +40,12 @@ const SingleArticlePage = async ({ params }) => {
     );
     return formattedDate;
   }
+  const deleteArticleAction = deleteArticle.bind(
+    null,
+    article.id,
+    article?.img,
+    article?.gif
+  );
 
   return (
     <div className="flex">
@@ -57,6 +72,12 @@ const SingleArticlePage = async ({ params }) => {
                 <p className="flex gap-2 w-25">
                   <BsCalendarDate /> {formatDate(article.createdAt)}
                 </p>
+                <form action={deleteArticleAction}>
+                  <button className="flex">
+                    <MdDelete />
+                    Delete
+                  </button>
+                </form>
               </div>
             </div>
             <Comentary articleId={id} user={user} />

@@ -1,10 +1,30 @@
+'use client';
+
 import { addProduct } from '@/app/lib/actions';
+import useFileUpload from '@/app/lib/utils/upFileFirebase';
 import styles from '@/app/ui/dashboard/products/addProduct/addProduct.module.css';
+import { useState } from 'react';
 
 const AddProductPage = () => {
+  const [fileImg, setFileImg] = useState(null);
+  const [img, setImg] = useState('');
+
+  const onSuccessImg = (downloadURL) => {
+    setImg(downloadURL);
+  };
+  const onErrorImg = (error) => {
+    console.error('Error during img upload:', error);
+  };
+  useFileUpload('products', fileImg, onSuccessImg, onErrorImg);
+  const addProductAction = addProduct.bind(null, img);
   return (
     <div className={styles.container}>
-      <form action={addProduct} className={styles.form}>
+      <form action={addProductAction} className={styles.form}>
+        <input
+          type="file"
+          onChange={(e) => setFileImg(e.target.files[0])}
+          id="image"
+        />
         <input type="text" placeholder="title" name="title" required />
         <select name="cat" id="cat">
           <option value="general">Choose a Category</option>
