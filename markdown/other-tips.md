@@ -28,3 +28,27 @@ rm -rf tmp_repo
 ```bash
 git pull origin main --allow-unrelated-histories
 ```
+
+### Git restore losed Github remote
+
+```bash
+git remote add origin https://github.com/SKRTEEEEEE/queen420next.git
+```
+
+### Git push new "rama"
+
+*Hacer el add y commit, despues:*
+
+```bash
+git checkout -b nombre_de_tu_rama
+git push origin nombre_de_tu_rama
+```
+
+### Unfollow a Github
+
+*Dejar de seguir al repositorio actual en la nube*
+
+```bash
+git remote -v
+git remote remove nombre_de_tu_repo(origin ...)
+```
