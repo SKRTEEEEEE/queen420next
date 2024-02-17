@@ -1,4 +1,4 @@
-# Other Tips
+# Tips
 
 ## Markdown
 

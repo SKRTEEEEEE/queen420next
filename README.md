@@ -1,32 +1,32 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# Markdown-basic-template
+# **NextJS MongoDB app**
 
 <div align="center">
   <img  src="https://github.com/SKRTEEEEEE/SKRTEEEEEE/blob/main/resources/img/grid-snake.svg"
        alt="snake" />
 </div>
 
-Template basico de markdown, especializado para proyectos individuales de  desarollo web Fullstack(cliente y servidor).
+A fully functional big app with various features and Web3 integration.
 
-## [Descripción](markdown/descripcion.md)
+## [Description](markdown/descripcion.md)
 
-## [Proceso](markdown/proceso.md)
+## [Process "es"](markdown/proceso.md)
 
-## [Recursos](markdown/recursos.md)
+## [Resourses "es"](markdown/recursos.md)
 
-## Contacto
+## Contact
 
-### Agradecimientos
+### Thanks
 
-### Licencia
+### License
 
-### Información de Contacto
+### Contact
 
 #### [Enviame un mensaje](mailto:adanreh.m@gmail.com)
 
-### Contribuciones y Problemas
+### Contributions and problems
 
-Si encuentras problemas o deseas contribuir al proyecto, por favor, crea un issue en el repositorio.
+If you find problems or want to contribute to the project, please create an issue in the repository.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
