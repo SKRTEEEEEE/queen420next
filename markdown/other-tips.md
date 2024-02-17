@@ -23,7 +23,11 @@ rm -rf tmp_repo
 ```
 
 ### Git pull especial
+Comando para cuando tenemos un repositorio que no tiene un seguimiento y lo queremos subir a continuacion de un repositiorio ya existente
+**Ojo, hay que tener commit los archivos**
+
 *Después de ejecutar este comando, Git intentará fusionar las historias de las dos ramas. Sin embargo, ten en cuenta que es posible que tengas que resolver conflictos si existen diferencias significativas entre las ramas.*
+
 
 ```bash
 git pull origin main --allow-unrelated-histories
@@ -32,7 +36,7 @@ git pull origin main --allow-unrelated-histories
 ### Git restore losed Github remote
 
 ```bash
-git remote add origin https://github.com/SKRTEEEEEE/queen420next.git
+git remote add origin nombre_de_tu_repositorio
 ```
 
 ### Git push new "rama"
@@ -52,3 +56,4 @@ git push origin nombre_de_tu_rama
 git remote -v
 git remote remove nombre_de_tu_repo(origin ...)
 ```
+
