@@ -13,7 +13,7 @@ A fully functional big app with various features and Web3 integration.
 
 ## [Process "es"](markdown/proceso.md)
 
-## [Resourses "es"](markdown/recursos.md)
+## [Resources "es"](markdown/recursos.md)
 
 ## Contact
 
